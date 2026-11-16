@@ -1,8 +1,8 @@
-# Tauri + React + Typescript
-
 # Adyton
 
-A local-first, open-source password manager for desktop, built with Tauri 2, React and TypeScript.
+A local-first open-source password manager.
+
+Licensed under AGPL-3.0. See LICENSE.
 
 ## Development
 
