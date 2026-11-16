@@ -2,7 +2,7 @@
 name = "adyton"
 version = "0.1.0"
 description = "A Tauri App"
-authors = "Jakub Augustin"
+authors = ["Jakub Augustin"]
 edition = "2024"
 license = "AGPL-3.0-only"
 
