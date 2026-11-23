@@ -1,10 +1,11 @@
-//import { useState } from "react";
-import "./App.css";
+import { LockIcon } from "@phosphor-icons/react";
 
 function App() {
   return (
-    <div>
-      <h1></h1>
+    <div className="bg-surface-base flex items-center flex-col ">
+      <h1>Yep i imported everything</h1>
+      <p>It's locked mate</p>
+      <LockIcon size={18} />
     </div>
   );
 }
