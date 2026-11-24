@@ -2,60 +2,95 @@ import {
   PlusIcon,
   SquaresFourIcon,
   StarIcon,
-  ShieldCheckIcon,
   TrashIcon,
   CloudIcon,
   LockIcon,
   GearIcon,
+  ShieldIcon,
 } from "@phosphor-icons/react";
+import type { ActiveView, ActiveModal } from "../types/navigation";
+import NavRailItem from "./NavRailItem";
 
-function NavRail() {
+type NavRailProps = {
+  activeView: ActiveView;
+  onSelectView: (view: ActiveView) => void;
+  onOpenModal: (view: ActiveModal) => void;
+};
+
+function NavRail({ activeView, onSelectView, onOpenModal }: NavRailProps) {
   return (
-    <div className="flex pt-8 pb-5 bg-surface-base border-x border-b border-border-hairline">
-      <nav className="flex w-full flex-col  items-center">
-        <div className="flex flex-col gap-6 items-center">
-          <PlusIcon
-            size={20}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+    <div
+      data-tauri-drag-region
+      className="flex pt-4 pb-5 bg-surface-base border-x border-b border-border-hairline"
+    >
+      <nav
+        data-tauri-drag-region
+        className="flex w-full flex-col  items-center"
+      >
+        <div
+          data-tauri-drag-region
+          className="flex flex-col gap-3.5 items-center"
+        >
+          <NavRailItem
+            icon={<PlusIcon size={15} weight="bold" />}
+            label="Add Item"
+            variant="add"
+            onClick={() => onOpenModal("add-item")}
           />
+
           <span className="h-px w-8 rounded-tile bg-border-hairline"></span>
-          <SquaresFourIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+          <NavRailItem
+            icon={<SquaresFourIcon size={22} weight="bold" />}
+            label="All Items"
+            isSelected={activeView === "all"}
+            hasAlert={null}
+            onClick={() => onSelectView("all")}
           />
-          <StarIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+
+          <NavRailItem
+            icon={<StarIcon size={22} weight="bold" />}
+            label="Favorites"
+            isSelected={activeView === "favorites"}
+            hasAlert={null}
+            onClick={() => onSelectView("favorites")}
           />
-          <ShieldCheckIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+
+          <NavRailItem
+            icon={<ShieldIcon size={22} weight="bold" />}
+            label="Security Audit"
+            isSelected={activeView === "audit"}
+            hasAlert={"warning"}
+            onClick={() => onSelectView("audit")}
           />
-          <TrashIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+
+          <NavRailItem
+            icon={<TrashIcon size={22} weight="bold" />}
+            label="Recently deleted"
+            isSelected={activeView === "trash"}
+            hasAlert={null}
+            onClick={() => onSelectView("trash")}
           />
         </div>
-        <div className="mt-auto flex flex-col gap-6">
-          <CloudIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+        <div data-tauri-drag-region className="mt-auto flex flex-col gap-3.5">
+          <NavRailItem
+            icon={<CloudIcon size={22} weight="bold" />}
+            label="Cloud Sync"
+            hasAlert={"info"}
+            onClick={() => {}}
           />
-          <LockIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+
+          <NavRailItem
+            icon={<LockIcon size={22} weight="bold" />}
+            label="Lock App"
+            hasAlert={null}
+            onClick={() => {}}
           />
-          <GearIcon
-            size={22}
-            weight="regular"
-            className="text-ink-secondary shrink-0"
+
+          <NavRailItem
+            icon={<GearIcon size={22} weight="bold" />}
+            label="Settings"
+            hasAlert={null}
+            onClick={() => onOpenModal("settings")}
           />
         </div>
       </nav>

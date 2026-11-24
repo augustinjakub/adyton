@@ -60,13 +60,11 @@
   --color-ink-muted: light-dark(#7a7a74, #737373);
 
   /* Vesper Accents & Signals */
-  --color-accent: light-dark(#b3561b, #ffc799);
-  --color-accent-wash: light-dark(
-    rgb(179 86 27 / 0.09),
-    rgb(255 199 153 / 0.1)
-  );
-  --color-signal-verified: light-dark(#157359, #99ffe4);
-  --color-signal-danger: light-dark(#bf3b3b, #f28b82);
+  /* Vesper Accents & Signals */
+  --color-accent: light-dark(#b3561b, #eed3b6);
+  --color-accent-wash: light-dark(rgb(179 86 27 / 0.09), #2b231c);
+  --color-signal-info: light-dark(#157359, #99ffe4);
+  --color-signal-warning: light-dark(#b3561b, #eed3b6);
 }
 
 @layer base {
