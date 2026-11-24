@@ -16,37 +16,69 @@
   /* Disable Tailwind's default palette so IntelliSense only shows Adyton tokens */
   --color-*: initial;
 
-  /* Typography */
+  /* Fonts */
   --font-sans: "IBM Plex Sans", -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* Surfaces */
-  --color-surface-sidebar: light-dark(#f4f4f6, #212124);
-  --color-surface-base: light-dark(#ffffff, #1b1b1e);
-  --color-surface-canvas: light-dark(#f6f6f8, #232327);
-  --color-surface-subtle: light-dark(#ebecee, #2e2e33);
+  /* Typography Scale */
+  --text-title: 1.125rem;
+  --text-title--line-height: 1.5rem;
 
-  /* Ink (Text & Icons) */
-  --color-ink-primary: light-dark(#0a0a0a, #f4f4f5);
-  --color-ink-secondary: light-dark(#525252, #a1a1aa);
-  --color-ink-muted: light-dark(#71717a, #85858e);
+  --text-secret: 0.875rem;
+  --text-secret--line-height: 1.25rem;
+
+  --text-ui: 0.8125rem;
+  --text-ui--line-height: 1.125rem;
+
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1rem;
+  --text-label--letter-spacing: 0.06em;
+
+  --text-micro: 0.65625rem;
+  --text-micro--line-height: 0.875rem;
+  --text-micro--letter-spacing: 0.04em;
+
+  /* Radius */
+  --radius-sharp: 4px;
+  --radius-tile: 6px;
+  --radius-modal: 8px;
+
+  /* Surfaces (Vesper Paper / Vesper Dark) */
+  --color-surface-chrome: light-dark(#f2f2ef, #0d0d0d);
+  --color-surface-base: light-dark(#f7f7f5, #101010);
+  --color-surface-elevated: light-dark(#ffffff, #151515);
+  --color-surface-selected: light-dark(#efefed, #181818);
+  --color-surface-subtle: light-dark(
+    rgb(16 16 16 / 0.05),
+    rgb(255 255 255 / 0.06)
+  );
 
   /* Borders */
-  --color-border-hairline: light-dark(#e4e4e7, #323237);
+  --color-border-hairline: light-dark(#e4e4df, #222222);
+  --color-border-inner: light-dark(#ecece8, #202020);
+  --color-border-specular: light-dark(
+    rgb(16 16 16 / 0.09),
+    rgb(255 255 255 / 0.1)
+  );
 
-  /* Buttons */
-  --color-btn-primary-bg: light-dark(#0a0a0a, #f4f4f5);
-  --color-btn-primary-hover: light-dark(#262626, #e4e4e7);
-  --color-btn-primary-ink: light-dark(#ffffff, #09090b);
-  --color-btn-secondary-bg: light-dark(#ebecee, #2e2e33);
-  --color-btn-secondary-hover: light-dark(#dfdfe4, #3a3a40);
+  /* Ink */
+  --color-ink-primary: light-dark(#101010, #ffffff);
+  --color-ink-secondary: light-dark(#575752, #a0a0a0);
+  --color-ink-muted: light-dark(#7a7a74, #737373);
 
-  /* Signals */
-  --color-signal-info: light-dark(#0088ff, #3b82f6);
-  --color-signal-danger: light-dark(#ff1f4b, #fb7185);
-  --color-signal-success: light-dark(#00c46a, #34d399);
-  --color-signal-warning: light-dark(#ff8a00, #fbbf24);
-  --color-signal-vault: light-dark(#7c3aed, #a78bfa);
+  /* Buttons (Monochrome Primary) */
+  --color-btn-primary-bg: light-dark(#101010, #ffffff);
+  --color-btn-primary-hover: light-dark(#262626, #e5e5e5);
+  --color-btn-primary-ink: light-dark(#ffffff, #101010);
+
+  /* Vesper Accents & Signals */
+  --color-accent: light-dark(#b8540d, #ffc799);
+  --color-accent-wash: light-dark(
+    rgb(184 84 13 / 0.09),
+    rgb(255 199 153 / 0.1)
+  );
+  --color-signal-verified: light-dark(#0d7a5f, #99ffe4);
+  --color-signal-danger: light-dark(#cc2929, #ff8080);
 }
 
 @layer base {
@@ -59,7 +91,8 @@
 
   body {
     font-family: var(--font-sans);
-    font-size: 13px;
+    font-size: var(--text-ui);
+    line-height: var(--text-ui--line-height);
     color: var(--color-ink-primary);
     background-color: var(--color-surface-base);
     user-select: none;

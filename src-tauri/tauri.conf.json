@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.tauri.app/config/2",
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Adyton",
   "version": "0.1.0",
   "identifier": "com.vamos.adyton",
@@ -14,9 +14,13 @@
       {
         "title": "Adyton",
         "width": 960,
-        "minWidth": 800,
+        "minWidth": 700,
         "height": 660,
-        "minHeight": 580
+        "minHeight": 500,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "decorations": true,
+        "trafficLightPosition": { "x": 20, "y": 27 }
       }
     ],
     "security": {
