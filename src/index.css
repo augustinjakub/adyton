@@ -24,30 +24,27 @@
   --text-title: 1.125rem;
   --text-title--line-height: 1.5rem;
 
-  --text-secret: 0.875rem;
-  --text-secret--line-height: 1.25rem;
+  --text-secret: 1rem;
+  --text-secret--line-height: 1.5rem;
 
   --text-ui: 0.8125rem;
   --text-ui--line-height: 1.125rem;
 
   --text-label: 0.6875rem;
   --text-label--line-height: 1rem;
-  --text-label--letter-spacing: 0.06em;
 
-  --text-micro: 0.65625rem;
+  --text-micro: 0.6875rem;
   --text-micro--line-height: 0.875rem;
-  --text-micro--letter-spacing: 0.04em;
 
   /* Radius */
   --radius-sharp: 4px;
   --radius-tile: 6px;
-  --radius-modal: 8px;
 
   /* Surfaces (Vesper Paper / Vesper Dark) */
   --color-surface-chrome: light-dark(#f2f2ef, #0d0d0d);
   --color-surface-base: light-dark(#f7f7f5, #101010);
   --color-surface-elevated: light-dark(#ffffff, #151515);
-  --color-surface-selected: light-dark(#efefed, #181818);
+  --color-surface-selected: light-dark(#efefed, #222222);
   --color-surface-subtle: light-dark(
     rgb(16 16 16 / 0.05),
     rgb(255 255 255 / 0.06)
@@ -56,29 +53,20 @@
   /* Borders */
   --color-border-hairline: light-dark(#e4e4df, #222222);
   --color-border-inner: light-dark(#ecece8, #202020);
-  --color-border-specular: light-dark(
-    rgb(16 16 16 / 0.09),
-    rgb(255 255 255 / 0.1)
-  );
 
   /* Ink */
   --color-ink-primary: light-dark(#101010, #ffffff);
   --color-ink-secondary: light-dark(#575752, #a0a0a0);
   --color-ink-muted: light-dark(#7a7a74, #737373);
 
-  /* Buttons (Monochrome Primary) */
-  --color-btn-primary-bg: light-dark(#101010, #ffffff);
-  --color-btn-primary-hover: light-dark(#262626, #e5e5e5);
-  --color-btn-primary-ink: light-dark(#ffffff, #101010);
-
   /* Vesper Accents & Signals */
-  --color-accent: light-dark(#b8540d, #ffc799);
+  --color-accent: light-dark(#b3561b, #ffc799);
   --color-accent-wash: light-dark(
-    rgb(184 84 13 / 0.09),
+    rgb(179 86 27 / 0.09),
     rgb(255 199 153 / 0.1)
   );
-  --color-signal-verified: light-dark(#0d7a5f, #99ffe4);
-  --color-signal-danger: light-dark(#cc2929, #ff8080);
+  --color-signal-verified: light-dark(#157359, #99ffe4);
+  --color-signal-danger: light-dark(#bf3b3b, #f28b82);
 }
 
 @layer base {
