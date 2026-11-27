@@ -18,17 +18,17 @@ function NavRailItem({
   hasAlert = null,
 }: NavRailItemProps) {
   const baseClasses =
-    "relative flex size-9 items-center justify-center rounded-tile transition-colors";
+    "relative flex size-9 items-center justify-center rounded-md transition-colors";
 
   let stateClasses = "";
   if (variant === "add") {
     stateClasses =
-      "bg-surface-elevated border border-border-hairline text-ink-secondary hover:bg-surface-selected hover:text-ink-primary";
+      "bg-surface-subtle text-ink-secondary hover:bg-surface-elevated hover:text-ink-primary";
   } else if (isSelected) {
-    stateClasses = "bg-accent-wash text-accent";
+    stateClasses = "text-accent";
   } else {
     stateClasses =
-      "text-ink-secondary hover:bg-surface-subtle hover:text-ink-primary";
+      "text-ink-secondary hover:bg-surface-elevated hover:text-ink-primary";
   }
 
   const dotColorClass =

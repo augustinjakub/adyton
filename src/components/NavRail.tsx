@@ -19,10 +19,7 @@ type NavRailProps = {
 
 function NavRail({ activeView, onSelectView, onOpenModal }: NavRailProps) {
   return (
-    <div
-      data-tauri-drag-region
-      className="flex pt-4 pb-5 bg-surface-base border-x border-b border-border-hairline"
-    >
+    <div data-tauri-drag-region className="flex pt-4 pb-5 bg-surface-chrome ">
       <nav
         data-tauri-drag-region
         className="flex w-full flex-col  items-center"

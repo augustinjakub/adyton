@@ -1,28 +1,23 @@
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
+import { formatShortcut } from "../utils/vaultHelpers";
 
 function TitleBar() {
   return (
     <header
       data-tauri-drag-region
-      className="col-span-full grid grid-cols-[1fr_auto_1fr] items-center bg-surface-base border border-border-hairline"
+      className="col-span-full relative flex  items-center justify-center bg-surface-chrome"
     >
-      <div data-tauri-drag-region className="min-w-21 h-full"></div>
       <button
         type="button"
-        className="h-8 flex items-center gap-2 px-2.5 w-110 rounded-tile bg-surface-elevated border border-border-hairline"
+        className="h-7 flex items-center justify-between gap-2 px-2.5 w-100 rounded-sharp bg-surface-elevated border border-border-hairline text-label text-ink-muted 
+        shadow-sm transition-colors hover:border-ink-muted/30 hover:text-ink-secondary"
       >
-        <MagnifyingGlassIcon
-          size={16}
-          className="text-ink-secondary shrink-0"
-        />
-        <span className="text-ink-secondary text-ui">
-          Search vault or run command...
+        <span className="flex items-center gap-2">
+          <MagnifyingGlassIcon size={13} className="shrink-0" />
+          <span>Search or run command...</span>
         </span>
-        <span className="ml-auto font-mono tracking-widest rounded-tile px-1.5 py-0.5 text-micro text-ink-secondary bg-surface-selected">
-          ⌘K
-        </span>
+        <kbd className="kbd">{formatShortcut("K")}</kbd>
       </button>
-      <div data-tauri-drag-region className="min-w-21 h-full"></div>
     </header>
   );
 }

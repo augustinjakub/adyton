@@ -21,58 +21,87 @@
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Typography Scale */
-  --text-title: 1.125rem;
-  --text-title--line-height: 1.5rem;
+  --text-*: initial;
 
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.75rem;
+  --text-title--letter-spacing: -0.015em;
   --text-secret: 1rem;
   --text-secret--line-height: 1.5rem;
 
   --text-ui: 0.8125rem;
   --text-ui--line-height: 1.125rem;
 
-  --text-label: 0.6875rem;
-  --text-label--line-height: 1rem;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.125rem;
 
   --text-micro: 0.6875rem;
   --text-micro--line-height: 0.875rem;
 
   /* Radius */
+  --radius-*: initial;
+  --radius-micro: 2px;
   --radius-sharp: 4px;
   --radius-tile: 6px;
+  --radius-full: 9999px;
 
   /* Surfaces (Vesper Paper / Vesper Dark) */
-  --color-surface-chrome: light-dark(#f2f2ef, #0d0d0d);
-  --color-surface-base: light-dark(#f7f7f5, #101010);
-  --color-surface-elevated: light-dark(#ffffff, #151515);
-  --color-surface-selected: light-dark(#efefed, #222222);
+  --color-surface-chrome: light-dark(#ecece7, #0d0d0d);
+  --color-surface-base: light-dark(#f3f3ef, #101010);
+  --color-surface-elevated: light-dark(#fcfcfa, #151515);
+  --color-surface-selected: light-dark(#e9e9e3, #1c1c1c);
+  --color-surface-inspector: light-dark(#faf9f5, #101010);
+  --color-surface-input: light-dark(#f2f1ec, #151515);
   --color-surface-subtle: light-dark(
     rgb(16 16 16 / 0.05),
     rgb(255 255 255 / 0.06)
   );
 
   /* Borders */
-  --color-border-hairline: light-dark(#e4e4df, #222222);
-  --color-border-inner: light-dark(#ecece8, #202020);
+  --color-border-hairline: light-dark(
+    rgb(16 16 16 / 0.08),
+    rgb(255 255 255 / 0.07)
+  );
+  --color-border-inner: light-dark(
+    rgb(16 16 16 / 0.05),
+    rgb(255 255 255 / 0.05)
+  );
+  --color-scrim: light-dark(rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.5));
 
-  /* Ink */
+  --shadow-*: initial;
+  --shadow-sm: 0 1px 2px light-dark(rgb(0 0 0 / 0.06), rgb(0 0 0 / 0.3));
+  --shadow-overlay: 0 16px 40px light-dark(rgb(0 0 0 / 0.12), rgb(0 0 0 / 0.5));
   --color-ink-primary: light-dark(#101010, #ffffff);
   --color-ink-secondary: light-dark(#575752, #a0a0a0);
-  --color-ink-muted: light-dark(#7a7a74, #737373);
+  --color-ink-muted: light-dark(#666660, #858585);
+  --color-ink-on-accent: light-dark(#ffffff, #101010);
 
   /* Vesper Accents & Signals */
-  /* Vesper Accents & Signals */
-  --color-accent: light-dark(#b3561b, #eed3b6);
-  --color-accent-wash: light-dark(rgb(179 86 27 / 0.09), #2b231c);
-  --color-signal-info: light-dark(#157359, #99ffe4);
-  --color-signal-warning: light-dark(#b3561b, #eed3b6);
+  --color-accent: light-dark(#157359, #99ffe4);
+  --color-accent-wash: light-dark(
+    rgb(21 115 89 / 0.09),
+    rgb(153 255 228 / 0.12)
+  );
+  --color-signal-warning: light-dark(#b3561b, #ffc799);
+  --color-signal-warning-wash: light-dark(
+    rgb(179 86 27 / 0.09),
+    rgb(255 199 153 / 0.12)
+  );
 }
 
 @layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border-hairline);
+  }
+
   html,
   body,
   #root {
     height: 100%;
     overflow: hidden;
+    overscroll-behavior: none;
   }
 
   body {
@@ -85,4 +114,33 @@
     cursor: default;
     -webkit-font-smoothing: antialiased;
   }
+
+  :focus-visible {
+    outline: 1.5px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-wash);
+  }
+
+  input,
+  textarea {
+    user-select: text;
+    caret-color: var(--color-accent);
+  }
+
+  textarea,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+    appearance: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border-hairline) transparent;
+  }
+}
+
+.kbd {
+  @apply shrink-0 rounded-micro bg-surface-subtle px-1.5 py-0.5 font-mono text-micro text-ink-muted;
 }
