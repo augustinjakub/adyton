@@ -1,97 +1,71 @@
 import {
+  ArrowsClockwiseIcon,
+  CardsThreeIcon,
+  GearSixIcon,
+  LockSimpleIcon,
   PlusIcon,
-  SquaresFourIcon,
+  ShieldCheckIcon,
   StarIcon,
   TrashIcon,
-  CloudIcon,
-  LockIcon,
-  GearIcon,
-  ShieldIcon,
 } from "@phosphor-icons/react";
-import type { ActiveView, ActiveModal } from "../types/navigation";
+import type { ActiveView } from "../types/navigation";
+import { formatShortcut } from "../utils/vaultHelpers";
 import NavRailItem from "./NavRailItem";
 
-type NavRailProps = {
-  activeView: ActiveView;
-  onSelectView: (view: ActiveView) => void;
-  onOpenModal: (view: ActiveModal) => void;
-};
+const NAV_TABS: {
+  id: ActiveView;
+  label: string;
+  Icon: typeof CardsThreeIcon;
+}[] = [
+  { id: "all", label: "All Items", Icon: CardsThreeIcon },
+  { id: "favorites", label: "Favorites", Icon: StarIcon },
+  { id: "audit", label: "Security Audit", Icon: ShieldCheckIcon },
+  { id: "trash", label: "Trash", Icon: TrashIcon },
+];
 
-function NavRail({ activeView, onSelectView, onOpenModal }: NavRailProps) {
+function NavRail() {
   return (
-    <div data-tauri-drag-region className="flex pt-4 pb-5 bg-surface-chrome ">
-      <nav
-        data-tauri-drag-region
-        className="flex w-full flex-col  items-center"
-      >
-        <div
-          data-tauri-drag-region
-          className="flex flex-col gap-3.5 items-center"
-        >
-          <NavRailItem
-            icon={<PlusIcon size={15} weight="bold" />}
-            label="Add Item"
-            variant="add"
-            onClick={() => onOpenModal("add-item")}
-          />
-
-          <span className="h-px w-8 rounded-tile bg-border-hairline"></span>
-          <NavRailItem
-            icon={<SquaresFourIcon size={22} weight="bold" />}
-            label="All Items"
-            isSelected={activeView === "all"}
-            hasAlert={null}
-            onClick={() => onSelectView("all")}
-          />
-
-          <NavRailItem
-            icon={<StarIcon size={22} weight="bold" />}
-            label="Favorites"
-            isSelected={activeView === "favorites"}
-            hasAlert={null}
-            onClick={() => onSelectView("favorites")}
-          />
-
-          <NavRailItem
-            icon={<ShieldIcon size={22} weight="bold" />}
-            label="Security Audit"
-            isSelected={activeView === "audit"}
-            hasAlert={"warning"}
-            onClick={() => onSelectView("audit")}
-          />
-
-          <NavRailItem
-            icon={<TrashIcon size={22} weight="bold" />}
-            label="Recently deleted"
-            isSelected={activeView === "trash"}
-            hasAlert={null}
-            onClick={() => onSelectView("trash")}
-          />
-        </div>
-        <div data-tauri-drag-region className="mt-auto flex flex-col gap-3.5">
-          <NavRailItem
-            icon={<CloudIcon size={22} weight="bold" />}
-            label="Cloud Sync"
-            hasAlert={"info"}
-            onClick={() => {}}
-          />
-
-          <NavRailItem
-            icon={<LockIcon size={22} weight="bold" />}
-            label="Lock App"
-            hasAlert={null}
-            onClick={() => {}}
-          />
-
-          <NavRailItem
-            icon={<GearIcon size={22} weight="bold" />}
-            label="Settings"
-            hasAlert={null}
-            onClick={() => onOpenModal("settings")}
-          />
-        </div>
-      </nav>
-    </div>
+    <nav className="flex flex-col h-full items-center justify-between bg-surface-chrome py-3">
+      <div className="flex flex-col items-center gap-2">
+        <NavRailItem
+          variant="add"
+          icon={<PlusIcon size={15} weight="regular" />}
+          label={`New Item (${formatShortcut("N")})`}
+          onClick={() => {}}
+        />
+        <div className="mt-1 h-px w-4 bg-border-hairline" />
+        {NAV_TABS.map(({ id, label, Icon }) => {
+          return (
+            <NavRailItem
+              key={id}
+              icon={<Icon size={22} weight="light" />}
+              label={label}
+              onClick={() => {}}
+            />
+          );
+        })}
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <NavRailItem
+          variant="utility"
+          icon={<ArrowsClockwiseIcon size={22} weight="light" />}
+          label="Sync Vault"
+          onClick={() => {}}
+        />
+        <NavRailItem
+          variant="utility"
+          icon={<LockSimpleIcon size={22} weight="light" />}
+          label={`Lock Vault (${formatShortcut("L")})`}
+          onClick={() => {}}
+        />
+        <NavRailItem
+          variant="utility"
+          icon={<GearSixIcon size={22} weight="light" />}
+          label={`Settings (${formatShortcut(",")})`}
+          onClick={() => {}}
+        />
+      </div>
+    </nav>
   );
 }
 

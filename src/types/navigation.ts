@@ -1,2 +1,2 @@
 export type ActiveView = "all" | "favorites" | "audit" | "trash";
-export type ActiveModal = "add-item" | "command-palette" | "settings" | null;
+export type ActiveModal = "command-palette" | "settings" | null;

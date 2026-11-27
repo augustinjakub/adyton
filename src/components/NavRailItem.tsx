@@ -2,59 +2,44 @@ import type { ReactNode } from "react";
 
 export type NavRailItemProps = {
   icon: ReactNode;
-  variant?: "nav" | "add";
   label: string;
+  variant?: "nav" | "add" | "utility";
   isSelected?: boolean;
-  hasAlert?: null | "warning" | "info";
+  hasAlert?: boolean;
   onClick: () => void;
 };
 
 function NavRailItem({
   icon,
   label,
-  onClick,
   variant = "nav",
   isSelected = false,
-  hasAlert = null,
+  hasAlert = false,
+  onClick,
 }: NavRailItemProps) {
-  const baseClasses =
-    "relative flex size-9 items-center justify-center rounded-md transition-colors";
-
-  let stateClasses = "";
-  if (variant === "add") {
-    stateClasses =
-      "bg-surface-subtle text-ink-secondary hover:bg-surface-elevated hover:text-ink-primary";
-  } else if (isSelected) {
-    stateClasses = "text-accent";
-  } else {
-    stateClasses =
-      "text-ink-secondary hover:bg-surface-elevated hover:text-ink-primary";
-  }
-
-  const dotColorClass =
-    hasAlert === "info" ? "bg-signal-info" : "bg-signal-warning";
+  const style =
+    variant === "add"
+      ? "size-7 border border-border-hairline bg-surface-elevated text-ink-secondary shadow-sm hover:border-accent hover:bg-accent-wash hover:text-accent"
+      : variant === "utility"
+        ? "size-8 text-ink-muted hover:bg-surface-subtle hover:text-ink-primary"
+        : isSelected
+          ? "size-8 text-accent hover:bg-surface-subtle"
+          : "size-8 text-ink-secondary hover:bg-surface-subtle hover:text-ink-primary";
 
   return (
     <button
-      className={`${baseClasses} ${stateClasses}`}
       type="button"
       onClick={onClick}
       title={label}
       aria-label={label}
+      aria-current={isSelected ? "page" : undefined}
+      className={`relative flex items-center justify-center transition-colors rounded-sharp shrink-0 ${style}`}
     >
-      {isSelected && (
-        <span
-          aria-hidden="true"
-          className="absolute -left-3 top-1/2 h-8 w-0.75 -translate-y-1/2 rounded-r-l bg-accent"
-        />
-      )}
-
       <span aria-hidden="true">{icon}</span>
-
       {hasAlert && (
         <span
           aria-hidden="true"
-          className={`absolute top-2 right-1.5 size-2 rounded-full ${dotColorClass}`}
+          className="absolute top-1.5 right-1.5 size-1.5 rounded-full bg-signal-warning"
         />
       )}
     </button>
