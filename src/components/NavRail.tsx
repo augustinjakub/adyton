@@ -2,11 +2,11 @@ import {
   ArrowsClockwiseIcon,
   CardsThreeIcon,
   GearSixIcon,
-  LockSimpleIcon,
   PlusIcon,
   ShieldCheckIcon,
   StarIcon,
   TrashIcon,
+  LockIcon,
 } from "@phosphor-icons/react";
 import type { ActiveView } from "../types/navigation";
 import { formatShortcut } from "../utils/vaultHelpers";
@@ -54,7 +54,7 @@ function NavRail() {
         />
         <NavRailItem
           variant="utility"
-          icon={<LockSimpleIcon size={22} weight="light" />}
+          icon={<LockIcon size={22} weight="light" />}
           label={`Lock Vault (${formatShortcut("L")})`}
           onClick={() => {}}
         />
