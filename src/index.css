@@ -141,6 +141,32 @@
   }
 }
 
-.kbd {
-  @apply shrink-0 rounded-micro bg-surface-subtle px-1.5 py-0.5 font-mono text-micro text-ink-muted;
+@layer components {
+  .btn {
+    @apply inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 rounded-sharp px-3 text-ui font-medium transition-colors disabled:cursor-not-allowed;
+  }
+  .btn-sm {
+    @apply inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-sharp px-2.5 py-1 text-label font-medium transition-colors disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply bg-accent text-ink-on-accent hover:opacity-85 disabled:opacity-45;
+  }
+  .btn-secondary {
+    @apply bg-surface-subtle text-ink-primary hover:bg-ink-primary/12;
+  }
+  .btn-danger {
+    @apply text-signal-warning hover:bg-signal-warning-wash;
+  }
+  .icon-btn {
+    @apply relative flex shrink-0 cursor-pointer items-center justify-center rounded-sharp text-ink-secondary transition-colors hover:bg-ink-primary/10 hover:text-ink-primary;
+  }
+  .field {
+    @apply w-full rounded-sharp border border-border-hairline bg-surface-input px-2.5 py-1.5 text-ink-primary placeholder:text-ink-muted focus:border-accent focus:outline-none;
+  }
+  .field-inline {
+    @apply relative -top-px -ml-2.75 block w-[calc(100%+11px)] rounded-sharp border border-border-hairline bg-surface-input px-2.5 py-0 text-ink-primary placeholder:text-ink-muted focus:border-accent focus:outline-none;
+  }
+  .kbd {
+    @apply shrink-0 rounded-micro bg-surface-subtle px-1.5 py-0.5 font-mono text-micro text-ink-muted;
+  }
 }

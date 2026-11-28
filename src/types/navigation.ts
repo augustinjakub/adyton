@@ -1,7 +1,7 @@
 export type ActiveView = "all" | "favorites" | "audit" | "trash";
 export type ActiveModal = "command-palette" | "settings" | null;
 
-export type ThemePreferences = "system" | "light" | "dark";
+export type ThemePreference = "system" | "light" | "dark";
 
 export type VaultSelection =
   | { mode: "none" }

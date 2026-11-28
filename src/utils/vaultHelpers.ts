@@ -54,7 +54,9 @@ export async function openSafeWebsite(rawUrl: string): Promise<void> {
     );
     if (url.protocol !== "http:" && url.protocol !== "https:") return;
     await openUrl(url.toString()).catch(() =>
-      window.open(url.toString(), "_blank", "noopener,noreffer"),
+      window.open(url.toString(), "_blank", "noopener,noreferrer"),
     );
-  } catch {}
+  } catch {
+    //* ignore bad form urls
+  }
 }

@@ -7,38 +7,46 @@ import type {
 import {
   evaluatePasswordStrength,
   generatePassphrase,
+  generateRandomPassword,
 } from "../utils/passwordStrength";
+
+import { normalizeRecoverySecret, generateRecoveryWords } from "../utils/bip39";
 
 export type VaultStatus = {
   exists: boolean;
   isUnlocked: boolean;
 };
 
-const CLIPBOARD_CLEAR_MS = 30_000;
+export type GeneratorOptions =
+  | { kind: "passphrase"; wordCount: number; includeExtras: boolean }
+  | { kind: "random"; length: number; includeSpecial: boolean };
+
+export type AppSettings = {
+  autoLockMinutes: number; // 0 = never
+  clipboardClearSeconds: number;
+};
+
+// DEV: flip to test LockScreen / onboarding flows
+const DEV_START = "unlocked" as "unlocked" | "locked" | "no-vault";
 
 let mockDb = updateFlags([...INITIAL_MOCK_VAULT]);
 let clipboardClearTimer: number | undefined;
-let isUnlocked = true;
-let vaultExists = true;
+let isUnlocked = DEV_START === "unlocked";
+let vaultExists = DEV_START !== "no-vault";
 let mockMasterPassword: string | null = null;
+let mockSettings: AppSettings = {
+  autoLockMinutes: 5,
+  clipboardClearSeconds: 30,
+};
 let mockRecoverySecret =
-  "abacus-acorn-amber-anchor-apron-atlas-badge-baker-bamboo-banjo-barrel-basket-beacon-beetle-bison-blanket-blossom-boulder-breeze-bronze";
+  "royal-negative-napkin-crystal-action-sport-broccoli-frown-swear-pistol-tooth-unaware-spawn-tennis-plug-rule-leg-agent-pumpkin-aim-surge-injury-pelican-random";
 
 function assertUnlocked(): void {
   if (!isUnlocked) throw new Error("Vault is locked");
 }
 
 function generateRecoverySecret(): string {
-  return generatePassphrase(20, false);
-}
-
-function normalizeRecoverySecret(secret: string): string {
-  return secret
-    .trim()
-    .toLowerCase()
-    .split(/[\s-]+/)
-    .filter(Boolean)
-    .join("-");
+  return generateRecoveryWords(24);
 }
 
 function updateFlags(items: VaultItemDetail[]): VaultItemDetail[] {
@@ -255,7 +263,10 @@ export async function copyToClipboard(text: string): Promise<void> {
   }
 
   clearTimeout(clipboardClearTimer);
-  clipboardClearTimer = window.setTimeout(clearClipboard, CLIPBOARD_CLEAR_MS);
+  clipboardClearTimer = window.setTimeout(
+    clearClipboard,
+    mockSettings.clipboardClearSeconds * 1000,
+  );
 }
 
 export async function clearClipboard(): Promise<void> {
@@ -266,4 +277,26 @@ export async function clearClipboard(): Promise<void> {
   } catch {
     // WebViews may block clipboard writes outside a user gesture
   }
+}
+
+export async function generatePassword(
+  options: GeneratorOptions,
+): Promise<string> {
+  // TODO: Replace with Rust OsRng-based generator command
+  return options.kind === "passphrase"
+    ? generatePassphrase(options.wordCount, options.includeExtras)
+    : generateRandomPassword(options.length, options.includeSpecial);
+}
+
+export async function getSettings(): Promise<AppSettings> {
+  // TODO: Replace with Rust command reading settings from config / vault header
+  return { ...mockSettings };
+}
+
+export async function updateSettings(
+  patch: Partial<AppSettings>,
+): Promise<AppSettings> {
+  // TODO: Replace with Rust command persisting settings
+  mockSettings = { ...mockSettings, ...patch };
+  return { ...mockSettings };
 }
