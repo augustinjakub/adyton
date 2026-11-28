@@ -7,3 +7,5 @@ export type VaultSelection =
   | { mode: "none" }
   | { mode: "item"; id: string }
   | { mode: "create"; previousId: string | null };
+
+export type VaultSortBy = "title" | "updated";
